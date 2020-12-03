@@ -1,0 +1,3 @@
+include ':pepperextras'
+rootProject.name='PepperExtras'
+include ':sampleapp'

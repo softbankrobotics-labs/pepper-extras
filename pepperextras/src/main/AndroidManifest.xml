@@ -1,0 +1,6 @@
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.softbankrobotics.dx.pepperextras" >
+    <application>
+        <activity android:name="com.softbankrobotics.dx.pepperextras.util.QiSDKTestActivity"/>
+    </application>
+</manifest>
