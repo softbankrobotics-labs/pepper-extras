@@ -69,7 +69,7 @@ open class ExplorationMapView(context: Context, attributeSet: AttributeSet)
     fun setExplorationMap(map: MapTopGraphicalRepresentation) {
         mapTopGraphicalRepresentation = map
         val img = map.image.toBitmap()
-	post { computeTargetDisplayRectAndScaleFactor(img, width, height) }
+        post { computeTargetDisplayRectAndScaleFactor(img, width, height) }
         explorationMapImage = img
         clearRobotPosition()
         postInvalidate()
@@ -82,17 +82,17 @@ open class ExplorationMapView(context: Context, attributeSet: AttributeSet)
     private var robotVector: PointF? = null
 
     // Paint for the robot
-    private val robotPaint =  Paint().apply {
+    protected val robotPaint =  Paint().apply {
         color = Color.RED
         style = Paint.Style.STROKE
         strokeWidth = 6f
     }
 
     // Size of the circle representing the robot
-    private val robotCircleSize: Int = 20
+    protected val robotCircleSize: Int = 20
 
     // Size of the vector representing the robot
-    private val robotVectorSize: Double = robotCircleSize * 0.8
+    protected val robotVectorSize: Double = robotCircleSize * 0.8
 
     fun setRobotPosition(positionInMap: Transform) {
         // Compute the position of the robot in the View
@@ -111,12 +111,12 @@ open class ExplorationMapView(context: Context, attributeSet: AttributeSet)
 
     fun clearRobotPosition() { robotCoordinates = null }
 
-    private fun mapToViewCoordinates(x: Double, y: Double): PointF {
+    protected fun mapToViewCoordinates(x: Double, y: Double): PointF {
         mapTopGraphicalRepresentation?.let { map ->
             val (xPixel, yPixel) = map.mapToGraphicalCoordinates(x, y)
             return PointF(
-                    targetDisplayRect.left + (xPixel * scaleFactor).toFloat(),
-                    targetDisplayRect.top + (yPixel * scaleFactor).toFloat())
+                targetDisplayRect.left + (xPixel * scaleFactor).toFloat(),
+                targetDisplayRect.top + (yPixel * scaleFactor).toFloat())
         }
         return PointF(0f, 0f)
     }
