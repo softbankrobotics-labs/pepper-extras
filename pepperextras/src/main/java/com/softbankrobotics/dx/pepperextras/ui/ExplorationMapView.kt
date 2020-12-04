@@ -69,7 +69,7 @@ open class ExplorationMapView(context: Context, attributeSet: AttributeSet)
     fun setExplorationMap(map: MapTopGraphicalRepresentation) {
         mapTopGraphicalRepresentation = map
         val img = map.image.toBitmap()
-        post { computeTargetDisplayRectAndScaleFactor(img, width, height) }
+        computeTargetDisplayRectAndScaleFactor(img, width, height)
         explorationMapImage = img
         clearRobotPosition()
         postInvalidate()
