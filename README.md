@@ -428,7 +428,7 @@ goto.run()
 
 #### 3.2.4. How it works
 
-Under the hood, `StubbornGoTo` combine a [`GoTo`](https://developer.softbankrobotics.com/pepper-qisdk/api/motion/reference/goto) action with and [`Animate`](https://developer.softbankrobotics.com/pepper-qisdk/api/motion/reference/animate) action. The algorithm for `StubbornGoTo` is quite simple: it will start by retrying a regular [`GoTo`](https://developer.softbankrobotics.com/pepper-qisdk/api/motion/reference/goto) 5 times, than it will retry [`GoTo`](https://developer.softbankrobotics.com/pepper-qisdk/api/motion/reference/goto) followed by [`Animate`](https://developer.softbankrobotics.com/pepper-qisdk/api/motion/reference/animate), using an generated animation consisting of a straight line to the target. After 10 retry, it will stop if it has not reached the target but is close enough. You can see the algorithm summarized in the following flowchart:
+Under the hood, `StubbornGoTo` combine a [`GoTo`](https://developer.softbankrobotics.com/pepper-qisdk/api/motion/reference/goto) action with and [`Animate`](https://developer.softbankrobotics.com/pepper-qisdk/api/motion/reference/animate) action. The algorithm for `StubbornGoTo` is quite simple: it will start by retrying a regular [`GoTo`](https://developer.softbankrobotics.com/pepper-qisdk/api/motion/reference/goto) 5 times, than it will retry [`GoTo`](https://developer.softbankrobotics.com/pepper-qisdk/api/motion/reference/goto) followed by [`Animate`](https://developer.softbankrobotics.com/pepper-qisdk/api/motion/reference/animate), using an generated animation consisting of a straight line to the target. After 10 retries, it will stop if it has not reached the target but is close enough. You can see the algorithm summarized in the following flowchart:
 
 <img width="700" src="stubborngoto.png"/>
 
@@ -639,7 +639,7 @@ val robotToObject = gazeToRobot.inverse() * gazeToObject
 Log.i("Geometry", robotToObject.toString())
 ```
 
-When you run this example and display `robotToObject`, with Pepper head in neutral position, you obtain:
+When you run this example and display `robotToObject`, with Pepper's head in neutral position, you obtain:
 
 ```
 I/Geometry: Transform{
@@ -659,7 +659,7 @@ This library defines several Kotlin extension functions on [`Quaternion`](https:
 * `operator fun Quaternion.minus(q2: Quaternion): Quaternion`: Subtracts a quaternion from the instance.
 * `operator fun Quaternion.times(alpha: Double): Quaternion`: Multiplies the instance by a scalar.
 * `operator fun Quaternion.times(q2: Quaternion): Quaternion`: Returns the Hamilton product of the instance by a [`Quaternion`](https://developer.softbankrobotics.com/pepper-qisdk/apidoc/javadoc/qisdk/com.aldebaran.qi.sdk.object.geometry/-quaternion/index.html).
-* `operator fun Quaternion.times(v: Vector3): Vector3`: Apply the inverse of the rotation represented by this [`Quaternion`](https://developer.softbankrobotics.com/pepper-qisdk/apidoc/javadoc/qisdk/com.aldebaran.qi.sdk.object.geometry/-quaternion/index.html) to a [`Vector3`](https://developer.softbankrobotics.com/pepper-qisdk/apidoc/javadoc/qisdk/com.aldebaran.qi.sdk.object.geometry/-vector3/index.html).
+* `operator fun Quaternion.times(v: Vector3): Vector3`: Applies the inverse of the rotation represented by this [`Quaternion`](https://developer.softbankrobotics.com/pepper-qisdk/apidoc/javadoc/qisdk/com.aldebaran.qi.sdk.object.geometry/-quaternion/index.html) to a [`Vector3`](https://developer.softbankrobotics.com/pepper-qisdk/apidoc/javadoc/qisdk/com.aldebaran.qi.sdk.object.geometry/-vector3/index.html).
 
 NB: these functions are operator overloads, which means that you can use the corresponding operators instead of calling the functions explicitly. To use:
 
@@ -673,20 +673,20 @@ NB: these functions are operator overloads, which means that you can use the cor
 In case you need to do more geometric operations on [`Quaternion`](https://developer.softbankrobotics.com/pepper-qisdk/apidoc/javadoc/qisdk/com.aldebaran.qi.sdk.object.geometry/-quaternion/index.html), you have access to the whole collection of operations defined in the [Apache Commons Math library](https://commons.apache.org/proper/commons-math/) classes [`Quaternion`](https://commons.apache.org/proper/commons-math/javadocs/api-3.6/org/apache/commons/math3/complex/Quaternion.html) and [`Rotation`](https://commons.apache.org/proper/commons-math/javadocs/api-3.6/org/apache/commons/math3/geometry/euclidean/threed/Rotation.html).
 This library defines Kotlin extension functions to allow you to convert [`Quaternion`](https://developer.softbankrobotics.com/pepper-qisdk/apidoc/javadoc/qisdk/com.aldebaran.qi.sdk.object.geometry/-quaternion/index.html):
 
-* `fun Quaternion.toApacheQuaternion(): ApacheQuaternion`: Convert [`Quaternion`](https://developer.softbankrobotics.com/pepper-qisdk/apidoc/javadoc/qisdk/com.aldebaran.qi.sdk.object.geometry/-quaternion/index.html) to Apache Commons `Quaternion`
-* `fun ApacheQuaternion.toQiQuaternion(): Quaternion`: Convert Apache Commons [`Quaternion`](https://commons.apache.org/proper/commons-math/javadocs/api-3.6/org/apache/commons/math3/complex/Quaternion.html) to [`Quaternion`](https://developer.softbankrobotics.com/pepper-qisdk/apidoc/javadoc/qisdk/com.aldebaran.qi.sdk.object.geometry/-quaternion/index.html)
-* `fun Quaternion.toApacheRotation(): ApacheRotation`: Convert [`Quaternion`](https://developer.softbankrobotics.com/pepper-qisdk/apidoc/javadoc/qisdk/com.aldebaran.qi.sdk.object.geometry/-quaternion/index.html) to Apache Commons `Rotation`
-* `fun ApacheRotation.toQiQuaternion(): Quaternion`: Convert Apache Commons [`Rotation`](https://commons.apache.org/proper/commons-math/javadocs/api-3.6/org/apache/commons/math3/geometry/euclidean/threed/Rotation.html) to [`Quaternion`](https://developer.softbankrobotics.com/pepper-qisdk/apidoc/javadoc/qisdk/com.aldebaran.qi.sdk.object.geometry/-quaternion/index.html)
+* `fun Quaternion.toApacheQuaternion(): ApacheQuaternion`: Converts [`Quaternion`](https://developer.softbankrobotics.com/pepper-qisdk/apidoc/javadoc/qisdk/com.aldebaran.qi.sdk.object.geometry/-quaternion/index.html) to Apache Commons `Quaternion`
+* `fun ApacheQuaternion.toQiQuaternion(): Quaternion`: Converts Apache Commons [`Quaternion`](https://commons.apache.org/proper/commons-math/javadocs/api-3.6/org/apache/commons/math3/complex/Quaternion.html) to [`Quaternion`](https://developer.softbankrobotics.com/pepper-qisdk/apidoc/javadoc/qisdk/com.aldebaran.qi.sdk.object.geometry/-quaternion/index.html)
+* `fun Quaternion.toApacheRotation(): ApacheRotation`: Converts [`Quaternion`](https://developer.softbankrobotics.com/pepper-qisdk/apidoc/javadoc/qisdk/com.aldebaran.qi.sdk.object.geometry/-quaternion/index.html) to Apache Commons `Rotation`
+* `fun ApacheRotation.toQiQuaternion(): Quaternion`: Converts Apache Commons [`Rotation`](https://commons.apache.org/proper/commons-math/javadocs/api-3.6/org/apache/commons/math3/geometry/euclidean/threed/Rotation.html) to [`Quaternion`](https://developer.softbankrobotics.com/pepper-qisdk/apidoc/javadoc/qisdk/com.aldebaran.qi.sdk.object.geometry/-quaternion/index.html)
 
 
 ##### 5.1.2.5. Add, subtract, multiply, divide `Vector3`
 
 This library defines several Kotlin extension functions on [`Vector3`](https://developer.softbankrobotics.com/pepper-qisdk/apidoc/javadoc/qisdk/com.aldebaran.qi.sdk.object.geometry/-vector3/index.html):
 
-* `operator fun Vector3.plus(v2: Vector3): Vector3`: Compute the sum of the instance and another [`Vector3`](https://developer.softbankrobotics.com/pepper-qisdk/apidoc/javadoc/qisdk/com.aldebaran.qi.sdk.object.geometry/-vector3/index.html)
-* `operator fun Vector3.minus(v2: Vector3): Vector3`: Subtract a [`Vector3`](https://developer.softbankrobotics.com/pepper-qisdk/apidoc/javadoc/qisdk/com.aldebaran.qi.sdk.object.geometry/-vector3/index.html) from the instance
-* `operator fun Vector3.div(d: Double): Vector3`: Divide the instance by a scalar
-* `operator fun Vector3.times(d: Double): Vector3`: Multiply the instance by a scalar
+* `operator fun Vector3.plus(v2: Vector3): Vector3`: Computes the sum of the instance and another [`Vector3`](https://developer.softbankrobotics.com/pepper-qisdk/apidoc/javadoc/qisdk/com.aldebaran.qi.sdk.object.geometry/-vector3/index.html)
+* `operator fun Vector3.minus(v2: Vector3): Vector3`: Substracts a [`Vector3`](https://developer.softbankrobotics.com/pepper-qisdk/apidoc/javadoc/qisdk/com.aldebaran.qi.sdk.object.geometry/-vector3/index.html) from the instance
+* `operator fun Vector3.div(d: Double): Vector3`: Divides the instance by a scalar
+* `operator fun Vector3.times(d: Double): Vector3`: Multiplies the instance by a scalar
 
 NB: these functions are operators overload, which means that you can use the corresponding operators instead of calling the functions explicitly. To use:
 
@@ -700,8 +700,8 @@ NB: these functions are operators overload, which means that you can use the cor
 In case you need to do more geometric operations on [`Vector3`](https://developer.softbankrobotics.com/pepper-qisdk/apidoc/javadoc/qisdk/com.aldebaran.qi.sdk.object.geometry/-vector3/index.html), you have access to the whole collection of operations defined in the [Apache Commons Math library](https://commons.apache.org/proper/commons-math/) classes [`Vector3D`](https://commons.apache.org/proper/commons-math/javadocs/api-3.6/org/apache/commons/math3/geometry/euclidean/threed/Vector3D.html).
 This library defines Kotlin extension functions to allow you to convert [`Vector3`](https://developer.softbankrobotics.com/pepper-qisdk/apidoc/javadoc/qisdk/com.aldebaran.qi.sdk.object.geometry/-vector3/index.html):
 
-* `fun Vector3.toApacheVector3D(): Vector3D`: Convert [`Vector3`](https://developer.softbankrobotics.com/pepper-qisdk/apidoc/javadoc/qisdk/com.aldebaran.qi.sdk.object.geometry/-vector3/index.html) to Apache Commons [`Vector3D`](https://commons.apache.org/proper/commons-math/javadocs/api-3.6/org/apache/commons/math3/geometry/euclidean/threed/Vector3D.html)
-* `fun Vector3D.toQiVector3(): Vector3`: Convert Apache Commons [`Vector3D`](https://commons.apache.org/proper/commons-math/javadocs/api-3.6/org/apache/commons/math3/geometry/euclidean/threed/Vector3D.html) to [`Vector3`](https://developer.softbankrobotics.com/pepper-qisdk/apidoc/javadoc/qisdk/com.aldebaran.qi.sdk.object.geometry/-vector3/index.html)
+* `fun Vector3.toApacheVector3D(): Vector3D`: Converts [`Vector3`](https://developer.softbankrobotics.com/pepper-qisdk/apidoc/javadoc/qisdk/com.aldebaran.qi.sdk.object.geometry/-vector3/index.html) to Apache Commons [`Vector3D`](https://commons.apache.org/proper/commons-math/javadocs/api-3.6/org/apache/commons/math3/geometry/euclidean/threed/Vector3D.html)
+* `fun Vector3D.toQiVector3(): Vector3`: Converts Apache Commons [`Vector3D`](https://commons.apache.org/proper/commons-math/javadocs/api-3.6/org/apache/commons/math3/geometry/euclidean/threed/Vector3D.html) to [`Vector3`](https://developer.softbankrobotics.com/pepper-qisdk/apidoc/javadoc/qisdk/com.aldebaran.qi.sdk.object.geometry/-vector3/index.html)
 
 
 ### 5.2. Detached `Frame`s
@@ -762,7 +762,7 @@ Convenient way to retrieve a snapshot to a mobile [`Frame`](https://developer.so
 
 #### 5.3.2. Typical usage
 
-Use for instance when you do camera processing, you retrieve the image of the camera associated to a [timestamp](https://developer.softbankrobotics.com/pepper-qisdk/api/perceptions/reference/timestamps#timestamps), and you want to do know what was the position of the [`gazeFrame`](https://developer.softbankrobotics.com/pepper-qisdk/api/motion/reference/frame#gaze-frame) at that moment.
+Used for instance for camera processing, you retrieved the image of the camera associated to a [timestamp](https://developer.softbankrobotics.com/pepper-qisdk/api/perceptions/reference/timestamps#timestamps), and you want to know what the position of the [`gazeFrame`](https://developer.softbankrobotics.com/pepper-qisdk/api/motion/reference/frame#gaze-frame) was at that moment.
 
 #### 5.3.3. How to use it
 
@@ -792,11 +792,11 @@ There are two Kotlin extension functions defined on [`MapTopGraphicalRepresentat
 
 * `fun MapTopGraphicalRepresentation.mapToGraphicalCoordinates(xMap, yMap): Pair<Double, Double>`
 
-Convert from coordinates in [`mapFrame`](https://developer.softbankrobotics.com/pepper-qisdk/api/motion/reference/frame#map-frame) to coordinate in the map image.
+Convert from coordinates in [`mapFrame`](https://developer.softbankrobotics.com/pepper-qisdk/api/motion/reference/frame#map-frame) to coordinates in the map image.
 
 * `fun MapTopGraphicalRepresentation.graphicalToMapCoordinates(xMap, yMap): Pair<Double, Double>`
 
-Convert from coordinates in the map image to coordinate in [`mapFrame`](https://developer.softbankrobotics.com/pepper-qisdk/api/motion/reference/frame#map-frame).
+Convert from coordinates in the map image to coordinates in [`mapFrame`](https://developer.softbankrobotics.com/pepper-qisdk/api/motion/reference/frame#map-frame).
 
 #### 5.4.3. Example
 
@@ -832,7 +832,7 @@ Pepper Extras define a `TAG` extension constant that you can use in the Android 
 
 #### 6.1.3. Example
 
-The following example illustrate the usage of the generic `TAG`:
+The following example illustrates the usage of the generic `TAG`:
 
 ```Kotlin
 // Import the generic TAG
@@ -904,7 +904,7 @@ implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-core:1.4.0'
 
 #### 7.2.1. Goal
 
-Inside a [Kotlin Coroutine](https://kotlinlang.org/docs/reference/coroutines/coroutines-guide.html), awaits for completion of a QiSDK [`Future`](https://developer.softbankrobotics.com/pepper-qisdk/principles/chaining-operations#futures) without blocking a thread.
+Inside a [Kotlin Coroutine](https://kotlinlang.org/docs/reference/coroutines/coroutines-guide.html), awaits the completion of a QiSDK [`Future`](https://developer.softbankrobotics.com/pepper-qisdk/principles/chaining-operations#futures) without blocking a thread.
 
 #### 7.2.2. How to use it
 
@@ -912,7 +912,7 @@ Inside a [Kotlin Coroutine](https://kotlinlang.org/docs/reference/coroutines/cor
 suspend fun <T> Future<T>.await(): T
 ```
 
-Awaits for completion of a QiSDK [`Future`](https://developer.softbankrobotics.com/pepper-qisdk/principles/chaining-operations#futures) without blocking a thread and resumes when the [`Future`](https://developer.softbankrobotics.com/pepper-qisdk/principles/chaining-operations#futures) computation is complete, returning the resulting value or throwing the corresponding exception if the [`Future`](https://developer.softbankrobotics.com/pepper-qisdk/principles/chaining-operations#futures) was cancelled or contains an error.
+Awaits the completion of a QiSDK [`Future`](https://developer.softbankrobotics.com/pepper-qisdk/principles/chaining-operations#futures) without blocking a thread and resumes when the [`Future`](https://developer.softbankrobotics.com/pepper-qisdk/principles/chaining-operations#futures) computation is complete, returning the resulting value or throwing the corresponding exception if the [`Future`](https://developer.softbankrobotics.com/pepper-qisdk/principles/chaining-operations#futures) was cancelled or contains an error.
 
 This suspending function is cancellable. Cancelling it will [`requestCancellation`](https://developer.softbankrobotics.com/pepper-qisdk/apidoc/javadoc/libqi-java/com/aldebaran/qi/Future.html#requestCancellation--) on the [`Future`](https://developer.softbankrobotics.com/pepper-qisdk/principles/chaining-operations#futures).
 
@@ -925,7 +925,7 @@ Under the hood this function relies on [suspendCancellableCoroutine](https://kot
 suspend fun <T> Future<T>.awaitOrNull(): T? =
 ```
 
-Awaits for completion of a QiSDK [`Future`](https://developer.softbankrobotics.com/pepper-qisdk/principles/chaining-operations#futures) without blocking a thread and resumes when the [`Future`](https://developer.softbankrobotics.com/pepper-qisdk/principles/chaining-operations#futures) computation is complete, returning the resulting value or `null` if the [`Future`](https://developer.softbankrobotics.com/pepper-qisdk/principles/chaining-operations#futures) was cancelled or contains an error.
+Awaits the completion of a QiSDK [`Future`](https://developer.softbankrobotics.com/pepper-qisdk/principles/chaining-operations#futures) without blocking a thread and resumes when the [`Future`](https://developer.softbankrobotics.com/pepper-qisdk/principles/chaining-operations#futures) computation is complete, returning the resulting value or `null` if the [`Future`](https://developer.softbankrobotics.com/pepper-qisdk/principles/chaining-operations#futures) was cancelled or contains an error.
 
 This suspending function is cancellable. Cancelling it will [`requestCancellation`](https://developer.softbankrobotics.com/pepper-qisdk/apidoc/javadoc/libqi-java/com/aldebaran/qi/Future.html#requestCancellation--) on the [`Future`](https://developer.softbankrobotics.com/pepper-qisdk/principles/chaining-operations#futures).
 
@@ -1025,14 +1025,14 @@ A global [`CoroutineScope`](https://kotlin.github.io/kotlinx.coroutines/kotlinx-
 fun SingleThread.newCoroutineScope(): CoroutineScope
 ```
 
-Create a new [`CoroutineScope`](https://kotlin.github.io/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines/-coroutine-scope/index.html) that will run on a global single thread. Unlike `SingleThread.GlobalScope`, cancellation or failure of any child coroutine of this scope will cancels all other children.
+Create a new [`CoroutineScope`](https://kotlin.github.io/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines/-coroutine-scope/index.html) that will run on a global single thread. Unlike `SingleThread.GlobalScope`, cancellation or failure of any child coroutine of this scope will cancel all other children.
 
 
 #### 7.4.3. Example
 
 **Example 1** - Data access and multithreading
 
-Let's examine a first example that does not uses our single thread coroutines. It only use [`GlobalScope`](https://kotlin.github.io/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines/-global-scope/) provided by the standard Kotlin library.
+Let's examine a first example that does not use our single thread coroutines. It only use [`GlobalScope`](https://kotlin.github.io/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines/-global-scope/) provided by the standard Kotlin library.
 
 In this example, we launch 100 coroutines, all doing the same action 10000 times: incrementing a shared mutable counter `x`.
 
@@ -1079,8 +1079,8 @@ runBlocking {
 }
 ```
 
-Now we it displays 1000000 as expected, as all coroutines ran in the same thread, and when one is running, you have guarantee that the other does not.
-In case your coroutines do a long task, do not hesitate to call yield to let the other
+Now we see that it displays 1000000 as expected, as all coroutines ran in the same thread, and when one is running, the other is guaranteed not to.
+In case your coroutines do a long task, do not hesitate to call yield to let the other run in parallel.
 
 
 **Example 2** - Monitor robot speed
